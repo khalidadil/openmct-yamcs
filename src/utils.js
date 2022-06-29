@@ -156,6 +156,9 @@ function accumulateResults(url, options, property, soFar, totalLimit, token) {
     const result = fetch(newUrl, options)
         .then(res => res.json());
 
+    console.log('newUrl', newUrl);
+    console.log('options');
+    console.log(options);
     console.log(result);
 
     return result.then(res => {
