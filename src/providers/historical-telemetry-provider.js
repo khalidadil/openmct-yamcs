@@ -50,6 +50,9 @@ export default class YamcsHistoricalTelemetryProvider {
     }
 
     request(domainObject, options) {
+        console.log('request');
+        console.log(domainObject);
+        console.log(options);
         options = { ...options };
         this.standardizeOptions(options, domainObject);
 
@@ -64,6 +67,10 @@ export default class YamcsHistoricalTelemetryProvider {
         let url = this.buildUrl(id, options);
         let requestArguments = [id, url, options];
 
+        console.log('requestArguments');
+        console.log('id', id);
+        console.log('url', url);
+        console.log('options', options);
 
         if (options.isSamples) {
             return this.getMinMaxHistory(...requestArguments);

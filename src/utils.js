@@ -145,7 +145,9 @@ function warnUnsupportedType(type) {
  *     a promise for an array of results accumulated over the requests
  */
 function accumulateResults(url, options, property, soFar, totalLimit, token) {
+    console.log('accumulateResults');
     if (aborted(options.signal)) {
+        console.log('aborted');
         return [];
     }
 
@@ -153,6 +155,14 @@ function accumulateResults(url, options, property, soFar, totalLimit, token) {
 
     const result = fetch(newUrl, options)
         .then(res => res.json());
+
+    fetch(newUrl, options).then(res => {
+        console.log(res);
+        console.log(res.json());
+        res.json();
+    });
+
+    console.log('result', result);
 
     return result.then(res => {
         if (property in res) {
@@ -169,8 +179,11 @@ function accumulateResults(url, options, property, soFar, totalLimit, token) {
 async function yieldResults(url, { signal, responseKeyName, totalRequestSize, onPartialResponse, formatter }) {
 
     if (aborted(signal)) {
+        console.log('aborted');
         return [];
     }
+
+    console.log('yieldResults');
 
     const yieldRequestHistory = getHistoryYieldRequest(signal);
     let count = 0;
